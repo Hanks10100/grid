@@ -1,0 +1,11 @@
+*~
+*.gem
+*.log
+.DS_STORE
+.svn
+.sass-cache
+.module-cache
+npm-debug.log
+node_modules
+fish-desktop
+todo
