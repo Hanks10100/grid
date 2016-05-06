@@ -1,4 +1,3 @@
-const { computePosition } = require('./utils/layouter');
 const { parseElementParam, getGridStyle } = require('./utils/parser');
 
 // 扩展 jQuery / Zepto 插件

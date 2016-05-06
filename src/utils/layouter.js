@@ -51,9 +51,9 @@ function computePosition(gridWidth, boxes) {
         // 计算新的 boundary
         boundary = xor(boundary, [
             move(origin, 0, 0),
-            move(origin, box.x, 0),
-            move(origin, 0, box.y),
-            move(origin, box.x, box.y)
+            move(origin, box[0], 0),
+            move(origin, 0, box[1]),
+            move(origin, box[0], box[1])
         ]);
 
         // 计算下一个起点的位置
