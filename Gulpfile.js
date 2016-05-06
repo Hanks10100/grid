@@ -13,13 +13,13 @@ gulp.task('clean', function() {
 });
 
 // 编译并压缩脚本
-gulp.task('script:compile', function() {
+gulp.task('compile', ['clean'], function() {
     return gulp.src(['src/*.js'])
         .pipe(named())
         .pipe(webpack(webpackConfig))
         .pipe(gulp.dest('dist'))
 });
-gulp.task('script:release', ['script:compile'], function() {
+gulp.task('release', ['compile'], function() {
     return gulp.src('dist/*.js')
         .pipe(uglify())
         .pipe(rename({ suffix: '.min' }))
@@ -28,9 +28,9 @@ gulp.task('script:release', ['script:compile'], function() {
 
 
 gulp.task('watch', function() {
-    gulp.watch('src/**/*.js', ['script:compile']);
+    gulp.watch('src/**/*.js', ['compile']);
 });
 
-gulp.task('default', ['script:compile'], function() {
+gulp.task('default', ['compile'], function() {
     gulp.start('watch');
 });
