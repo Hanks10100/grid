@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Grid Component</title>
-    <script src="jquery-2.1.1.js"></script>
-    <script src="../dist/grid.jquery.js"></script>
+    <script src="libs/react.js"></script>
+    <script src="libs/react-dom.js"></script>
+    <script src="../dist/grid.react.js"></script>
     <style>
         .demo { clear: both; }
         .grid-wrapper {
@@ -17,7 +18,7 @@
             display: flex;
             color: #FFF;
             transition: all .3s;
-            font-size: 20px;
+            font-size: 40px;
         }
         .grid-cell > * {
             margin: auto;
@@ -36,23 +37,33 @@
 </head>
 <body>
     <div class="demo">
-        <div id="GridAnimation">
-            <div>&#9312;</div>
-            <div>&#9313;</div>
-            <div>&#9314;</div>
-            <div>&#9315;</div>
-            <div>&#9316;</div>
-            <div>&#9317;</div>
-        </div>
+        <div id="grid"></div>
     </div>
     <script>
-        $(function() {
-            $('#GridAnimation').wrapGrid({
-                width: 500,
-                column: 10,
-                layout: [[10,2], [3,3], [3,3], [4,2], [4,3], [6,2]]
-            });
-        })
+        var h = React.createElement;
+        function GridTest() {
+            return h(
+                GridLayout,
+                {
+                    width: 500,
+                    column: 10,
+                    layout: [[10,2], [3,3], [3,3], [4,2], [4,3], [6,2]],
+                    gap: 8,
+                    border: {
+                        // width: '1px',
+                        // color: 'red',
+                        // radius: '16px'
+                    }
+                },
+                React.DOM.div(null, '①'),
+                React.DOM.div(null, '②'),
+                React.DOM.div(null, '③'),
+                React.DOM.div(null, '④'),
+                React.DOM.div(null, '⑤'),
+                React.DOM.div(null, '⑥')
+            )
+        }
+        ReactDOM.render(React.createElement(GridTest), document.getElementById('grid'));
     </script>
 </body>
 </html>

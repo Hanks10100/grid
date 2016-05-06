@@ -5,41 +5,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Grid Component</title>
-
-    <link rel="stylesheet" href="../dist/styles.css">
+    <script src="libs/jquery-2.1.1.js"></script>
+    <script src="../dist/grid.jquery.js"></script>
     <style>
-        .wrapper {
-            clear: both;
-        }
-        .wrapper .grid {
+        .demo { clear: both; }
+        .grid-wrapper {
             float: left;
             margin: 10px;
         }
+        .grid-cell {
+            display: flex;
+            color: #FFF;
+            transition: all .3s;
+            font-size: 20px;
+        }
+        .grid-cell > * {
+            margin: auto;
+        }
+        .grid-cell:nth-child(1)  { background-color: #AAAACC; }
+        .grid-cell:nth-child(2)  { background-color: #3FBDBD; }
+        .grid-cell:nth-child(3)  { background-color: #EFAB5C; }
+        .grid-cell:nth-child(4)  { background-color: #D05B5B; }
+        .grid-cell:nth-child(5)  { background-color: #4AD48C; }
+        .grid-cell:nth-child(6)  { background-color: #5C5CC0; }
+        .grid-cell:nth-child(7)  { background-color: #F14BA7; }
+        .grid-cell:nth-child(8)  { background-color: #A5A534; }
+        .grid-cell:nth-child(9)  { background-color: #CD4CDC; }
     </style>
 
 </head>
 <body>
-    <div id="simpleGrid_8" style="width:50%; margin: 0 auto;">
-        <b>&#8984;</b><b>&#8984;</b><b>&#8984;</b><b>&#8984;</b>
-        <b>&#8984;</b><b>&#8984;</b><b>&#8984;</b><b>&#8984;</b>
+    <div class="demo">
+        <div id="GridAnimation">
+            <div>&#9312;</div>
+            <div>&#9313;</div>
+            <div>&#9314;</div>
+            <div>&#9315;</div>
+            <div>&#9316;</div>
+            <div>&#9317;</div>
+        </div>
     </div>
-    <div id="simpleGrid_4">
-        <p>A</p><p>B</p>
-        <p>C</p><p>D</p>
-    </div>
-    <script src="../libs/jquery-2.1.1.js"></script>
-    <script src="../dist/components/grid.jquery.js"></script>
     <script>
-        console.log('jQuery', $);
-        $('#simpleGrid_8').applyGrid({col: 4, gap: 16});
-
-        $('#simpleGrid_4').applyGrid({
-            col: 5, gap: 5,
-            width: 200,
-            border: { radius: 15 },
-            size: [[3, 2], [2, 3], [3, 3], [2, 2]],
-        });
-
+        $(function() {
+            $('#GridAnimation').wrapGrid({
+                width: 500,
+                column: 10,
+                layout: [[10,2], [3,3], [3,3], [4,2], [4,3], [6,2]]
+            });
+        })
     </script>
 </body>
 </html>
