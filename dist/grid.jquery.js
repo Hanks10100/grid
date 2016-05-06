@@ -177,11 +177,14 @@
 	    var column = props.column;
 	    var width = props.width;
 	    var layout = props.layout;
+	    var _props$gap = props.gap;
+	    var gap = _props$gap === undefined ? 0 : _props$gap;
+	    var border = props.border;
 	
-	    var ratio = width / column;
+	    var ratio = (width + gap) / column;
 	
 	    // 计算 Grid 的高度
-	    var height = origins.pop().y * ratio;
+	    var height = origins.pop().y * ratio - gap;
 	
 	    // 计算外框样式
 	    var wrapperStyle = {
@@ -194,13 +197,31 @@
 	    var layoutStyle = layout.map(function (size, index) {
 	        var coord = origins[index];
 	
-	        return {
+	        var boxStyle = {
 	            position: 'absolute',
+	            boxSizing: 'border-box',
 	            top: coord.y * ratio + unit,
 	            left: coord.x * ratio + unit,
-	            width: size[0] * ratio + unit,
-	            height: size[1] * ratio + unit
+	            width: size[0] * ratio - gap + unit,
+	            height: size[1] * ratio - gap + unit
 	        };
+	
+	        // 给网格添加边框
+	        if (border) {
+	            var _width = border.width;
+	            var _border$style = border.style;
+	            var style = _border$style === undefined ? 'solid' : _border$style;
+	            var _border$color = border.color;
+	            var color = _border$color === undefined ? '#000' : _border$color;
+	            var radius = border.radius;
+	
+	            var borderStyle = _width + ' ' + style + ' ' + color;
+	            if (_width && coord.x > 0) boxStyle.borderLeft = borderStyle;
+	            if (_width && coord.y > 0) boxStyle.borderTop = borderStyle;
+	            if (radius) boxStyle.borderRadius = radius;
+	        }
+	
+	        return boxStyle;
 	    });
 	
 	    return { wrapperStyle: wrapperStyle, layoutStyle: layoutStyle };
