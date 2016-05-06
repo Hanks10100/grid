@@ -8,8 +8,9 @@
 
 ## 使用方法
 
-在 `dist` 目录中的 `grid.jquery.js`，是已经封装好了的 jQuery 插件，新增了 `wrapGrid` 方法。详细使用方法参考 `demo` 目录中的例子。
+在 `dist` 目录中的 `grid.jquery.js`，是已经封装好了的 jQuery 插件，新增了 `wrapGrid` 方法。`grid.react.js` 是封装好的 React 无状态组件。详细使用方法参考 `demo` 目录中的例子。
 
+### jQuery 插件使用方法
 ```html
 <div id="grid">
     <div>&#9312;</div>
@@ -29,13 +30,29 @@ $('#grid').wrapGrid({
 });
 ```
 
+### React 组件使用方法
+
+```js
+var layout = [[10,2], [3,3], [3,3], [4,2], [4,3], [6,2]];
+ReactDOM.render(
+    <GridLayout width={500}, column={10}, layout={layout}>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+    </GridLayout>,
+    document.getElementById('grid')
+)
+```
+
 其中 `layout` 参数表示所有网格的宽高构成的数组，第一个数为横向长度，第二个为纵向长度。
 
 ### 详细参数说明
 
 ```js
-
-$('#grid').wrapGrid({
+var props = {
     width: 500,       // [必需] 网格容器的真实宽度
     unit: 'px',       // 真实宽度、高度的单位，默认为 px
     column: 10,       // [必需] 网格容器的虚拟宽度（列数），每个网格的列数都以此为参考
@@ -49,5 +66,5 @@ $('#grid').wrapGrid({
         color: '#000',
         radius: '',
     }
-});
+}
 ```
