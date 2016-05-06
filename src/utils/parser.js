@@ -1,19 +1,21 @@
-const { computePosition } = require('./layouter');
 
-function parseElementParam(element) {
-}
-
-function getGridStyle(props) {
-    const { unit = 'px', column, width, layouts } = props;
+function getGridStyle(props, origins) {
+    const { unit = 'px', column, width, layout } = props;
     const ratio = width / column;
-
-    const origins = computePosition(column, layouts);
 
     // 计算 Grid 的高度
     const height = origins.pop().y * ratio;
 
+    // 计算外框样式
+    const wrapperStyle = {
+        position: 'relative',
+        boxSizing: 'border-box',
+        width  : `${width}${unit}`,
+        height : `${height}${unit}`,
+    };
+
     // 计算布局样式
-    const layoutStyle = layouts.map((size, index) => {
+    const layoutStyle = layout.map((size, index) => {
         const coord = origins[index];
 
         const style = {
@@ -28,21 +30,9 @@ function getGridStyle(props) {
         return style;
     });
 
-    // 计算外框样式
-    const wrapperStyle = {
-        position: 'relative',
-        boxSizing: 'border-box',
-        width  : `${width}${unit}`,
-        height : `${height}${unit}`,
-    };
-
-    return {
-        layoutStyle,
-        wrapperStyle
-    }
+    return { wrapperStyle, layoutStyle }
 }
 
 module.exports = {
-    parseElementParam,
     getGridStyle,
 }

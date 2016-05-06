@@ -39,11 +39,11 @@ function getOrigin(boundary) {
 
 // =========================================================
 //  计算每个图形应该摆放的起始位置
-//  @param 1: 网格横向总宽度
-//  @param 2: 由每个图形的宽高构成的数组 [{x:*,y:*},...]
+//  @param column: 网格横向总宽度
+//  @param layout: 由每个图形的宽高构成的数组 [{x:*,y:*},...]
 //  返回值: 每个图形应该摆放的起始位置所构成的数组
 // =========================================================
-function computePosition(column, layouts) {
+function computePosition({ column, layout }) {
     // 初始化所有格子的起点记录
     const record = [{ x: 0, y: 0 }];
 
@@ -51,7 +51,7 @@ function computePosition(column, layouts) {
     var origin = { x: 0, y: 0 };
     var boundary = [origin, { x: column, y: 0 }];
 
-    layouts.forEach(vector => {
+    layout.forEach(vector => {
 
         // 计算新的边界线
         boundary = xor(boundary, getRect(origin, vector));
