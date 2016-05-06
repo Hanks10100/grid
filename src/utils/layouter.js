@@ -37,18 +37,6 @@ function getOrigin(boundary) {
     return { x, y };
 }
 
-// 添加分界线指示器
-function addIndicator(record) {
-
-    // 判断左侧和顶部是否需要添加分界线
-    record.forEach(coord => {
-        coord.left = (coord.x > 0);
-        coord.top  = (coord.y > 0);
-    });
-
-    return record;
-}
-
 // =========================================================
 //  计算每个图形应该摆放的起始位置
 //  @param column: 网格横向总宽度
@@ -73,9 +61,6 @@ function computePosition({ column, layout }) {
 
         record.push(origin);
     });
-
-    // 添加分界线指示器
-    addIndicator(record, layout, column);
 
     return record;
 }
