@@ -40,5 +40,5 @@ GridLayout.propTypes = {
     children: arrayOf(element).isRequired
 }
 
-// window.GridLayout = GridLayout;
+window.GridLayout = GridLayout;
 module.exports = GridLayout;
