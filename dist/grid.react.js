@@ -44,46 +44,11 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(1);
+	module.exports = __webpack_require__(4);
 
 
 /***/ },
-/* 1 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _require = __webpack_require__(2);
-	
-	var computePosition = _require.computePosition;
-	
-	var _require2 = __webpack_require__(3);
-	
-	var getGridStyle = _require2.getGridStyle;
-	
-	// 扩展 jQuery / Zepto 插件
-	
-	$.fn.extend({
-	    wrapGrid: function wrapGrid() {
-	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-	
-	        var origins = computePosition(options);
-	
-	        var _getGridStyle = getGridStyle(options, origins);
-	
-	        var wrapperStyle = _getGridStyle.wrapperStyle;
-	        var layoutStyle = _getGridStyle.layoutStyle;
-	
-	
-	        this.each(function (x, wrapper) {
-	            $(wrapper).addClass('grid-wrapper').css(wrapperStyle).children().each(function (index, cell) {
-	                $(cell).wrap($('<div class="grid-cell"></div>').attr('data-index', index).css(layoutStyle[index]));
-	            });
-	        });
-	    }
-	});
-
-/***/ },
+/* 1 */,
 /* 2 */
 /***/ function(module, exports) {
 
@@ -231,6 +196,69 @@
 	    getGridStyle: getGridStyle
 	};
 
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	// const React = require('react');
+	
+	var _require = __webpack_require__(2);
+	
+	var computePosition = _require.computePosition;
+	
+	var _require2 = __webpack_require__(3);
+	
+	var getGridStyle = _require2.getGridStyle;
+	
+	// 简化 createElement 变量名
+	
+	var h = React.createElement;
+	
+	function GridLayout(props) {
+	    var origins = computePosition(props);
+	
+	    var _getGridStyle = getGridStyle(props, origins);
+	
+	    var wrapperStyle = _getGridStyle.wrapperStyle;
+	    var layoutStyle = _getGridStyle.layoutStyle;
+	
+	
+	    return h('div', { className: 'grid-wrapper', style: wrapperStyle }, React.Children.map(props.children, function (cell, index) {
+	        return h('div', {
+	            className: 'grid-cell',
+	            'data-index': index,
+	            style: layoutStyle[index]
+	        }, cell);
+	    }));
+	}
+	
+	var _React$PropTypes = React.PropTypes;
+	var arrayOf = _React$PropTypes.arrayOf;
+	var element = _React$PropTypes.element;
+	var number = _React$PropTypes.number;
+	var shape = _React$PropTypes.shape;
+	var string = _React$PropTypes.string;
+	
+	GridLayout.propTypes = {
+	    width: number.isRequired,
+	    unit: string,
+	    column: number.isRequired,
+	    layout: arrayOf(arrayOf(number)).isRequired,
+	    gap: number,
+	    border: shape({
+	        width: string,
+	        style: string,
+	        color: string,
+	        radius: string
+	    }),
+	    children: arrayOf(element).isRequired
+	};
+	
+	window.GridLayout = GridLayout;
+	module.exports = GridLayout;
+
 /***/ }
 /******/ ]);
-//# sourceMappingURL=grid.jquery.js.map
+//# sourceMappingURL=grid.react.js.map
