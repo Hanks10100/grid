@@ -14,7 +14,7 @@ $.fn.extend({
                 .each((index, cell) => {
                     $(cell).wrap(
                         $('<div class="grid-cell"></div>')
-                            .attr('cell-index', index)
+                            .attr('data-index', index)
                             .css(layoutStyle[index])
                     );
                 });
