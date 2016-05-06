@@ -24,5 +24,21 @@ function GridLayout(props) {
     )
 }
 
+const { arrayOf, element, number, shape, string } = React.PropTypes;
+GridLayout.propTypes = {
+    width: number.isRequired,
+    unit: string,
+    column: number.isRequired,
+    layout: arrayOf(arrayOf(number)).isRequired,
+    gap: number,
+    border: shape({
+        width: string,
+        style: string,
+        color: string,
+        radius: string,
+    }),
+    children: arrayOf(element).isRequired
+}
+
 // window.GridLayout = GridLayout;
 module.exports = GridLayout;
