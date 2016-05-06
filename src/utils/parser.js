@@ -29,10 +29,11 @@ function getGridStyle(props, origins) {
 
         // 给网格添加边框
         if (border) {
-            const { width = '1px', style = 'solid', color = '#000' } = border;
+            const { width, style = 'solid', color = '#000', radius } = border;
             const borderStyle = `${width} ${style} ${color}`;
-            if (coord.x > 0) boxStyle.borderLeft = borderStyle;
-            if (coord.y > 0) boxStyle.borderTop  = borderStyle;
+            if (width && coord.x > 0) boxStyle.borderLeft = borderStyle;
+            if (width && coord.y > 0) boxStyle.borderTop  = borderStyle;
+            if (radius) boxStyle.borderRadius = radius;
         }
 
         return boxStyle;
