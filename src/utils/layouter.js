@@ -39,21 +39,21 @@ function getOrigin(boundary) {
 //  @param 2: 由每个图形的宽高构成的数组 [{x:*,y:*},...]
 //  返回值: 每个图形应该摆放的起始位置所构成的数组
 // =========================================================
-function computePosition(gridWidth, boxes) {
+function computePosition(column, layouts) {
     const record = [{ x: 0, y: 0 }];       // 初始化所有格子的起点记录
 
     // 初始化起点和底部边界线
     let origin = { x: 0, y: 0 };
-    let boundary = [origin, { x: gridWidth, y: 0 }];
+    let boundary = [origin, { x: column, y: 0 }];
 
-    boxes.forEach(box => {
+    layouts.forEach(cell => {
 
         // 计算新的 boundary
         boundary = xor(boundary, [
             move(origin, 0, 0),
-            move(origin, box[0], 0),
-            move(origin, 0, box[1]),
-            move(origin, box[0], box[1])
+            move(origin, cell[0], 0),
+            move(origin, 0, cell[1]),
+            move(origin, cell[0], cell[1])
         ]);
 
         // 计算下一个起点的位置

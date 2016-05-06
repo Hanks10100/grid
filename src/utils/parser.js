@@ -4,10 +4,10 @@ function parseElementParam(element) {
 }
 
 function getGridStyle(props) {
-    const { unit, row, col, width, layouts } = props;
-    const ratio = width / col;
+    const { unit = 'px', column, width, layouts } = props;
+    const ratio = width / column;
 
-    const origins = computePosition(col, layouts);
+    const origins = computePosition(column, layouts);
 
     // 计算 Grid 的高度
     const height = origins.pop().y * ratio;
