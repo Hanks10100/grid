@@ -23,19 +23,18 @@ function xor(A, B) {
 
 // 根据边界集合计算下一个起点的坐标
 function getOrigin(boundary) {
-    let minX = Number.MAX_VALUE;
-    let minY = Number.MAX_VALUE;
+    var x = Number.MAX_VALUE;
+    var y = Number.MAX_VALUE;
 
     boundary.forEach(point => {
-        if (point.y < minY) {
-            minX = point.x;
-            minY = point.y;
-        } else if (point.y === minY) {
-            minX = (point.x < minX) ? point.x : minX;
+        if (point.y < y) {
+            ({ x, y } = point);
+        } else if (point.y === y) {
+            x = (point.x < x) ? point.x : x;
         }
     });
 
-    return { x: minX, y: minY };
+    return { x, y };
 }
 
 // =========================================================
@@ -45,11 +44,12 @@ function getOrigin(boundary) {
 //  返回值: 每个图形应该摆放的起始位置所构成的数组
 // =========================================================
 function computePosition(column, layouts) {
-    const record = [{ x: 0, y: 0 }];       // 初始化所有格子的起点记录
+    // 初始化所有格子的起点记录
+    const record = [{ x: 0, y: 0 }];
 
     // 初始化起点和底部边界线
-    let origin = { x: 0, y: 0 };
-    let boundary = [origin, { x: column, y: 0 }];
+    var origin = { x: 0, y: 0 };
+    var boundary = [origin, { x: column, y: 0 }];
 
     layouts.forEach(vector => {
 
