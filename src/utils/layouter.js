@@ -4,9 +4,14 @@ function isEqual(pa, pb) {
     return pa.x === pb.x && pa.y === pb.y;
 }
 
-// 移动点的位置
-function move(point, x = 0, y = 0) {
-    return { x: point.x + x, y: point.y + y };
+// 获取由起点和一个向量构成的矩形的顶点坐标
+function getRect(origin, vector) {
+    return [
+        { x: origin.x, y: origin.y },
+        { x: origin.x + vector[0], y: origin.y },
+        { x: origin.x, y: origin.y + vector[1] },
+        { x: origin.x + vector[0], y: origin.y + vector[1] }
+    ];
 }
 
 // 求集合对称差，参考公式：AΔB = (A - B)∪(B - A)
@@ -46,15 +51,10 @@ function computePosition(column, layouts) {
     let origin = { x: 0, y: 0 };
     let boundary = [origin, { x: column, y: 0 }];
 
-    layouts.forEach(cell => {
+    layouts.forEach(vector => {
 
-        // 计算新的 boundary
-        boundary = xor(boundary, [
-            move(origin, 0, 0),
-            move(origin, cell[0], 0),
-            move(origin, 0, cell[1]),
-            move(origin, cell[0], cell[1])
-        ]);
+        // 计算新的边界线
+        boundary = xor(boundary, getRect(origin, vector));
 
         // 计算下一个起点的位置
         origin = getOrigin(boundary);
@@ -66,7 +66,5 @@ function computePosition(column, layouts) {
 }
 
 module.exports = {
-    isEqual,
-    xor,
     computePosition,
 }
