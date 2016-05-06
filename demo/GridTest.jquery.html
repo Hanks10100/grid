@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Grid Component</title>
+
+    <link rel="stylesheet" href="../dist/styles.css">
+    <style>
+        .wrapper {
+            clear: both;
+        }
+        .wrapper .grid {
+            float: left;
+            margin: 10px;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="simpleGrid_8" style="width:50%; margin: 0 auto;">
+        <b>&#8984;</b><b>&#8984;</b><b>&#8984;</b><b>&#8984;</b>
+        <b>&#8984;</b><b>&#8984;</b><b>&#8984;</b><b>&#8984;</b>
+    </div>
+    <div id="simpleGrid_4">
+        <p>A</p><p>B</p>
+        <p>C</p><p>D</p>
+    </div>
+    <script src="../libs/jquery-2.1.1.js"></script>
+    <script src="../dist/components/grid.jquery.js"></script>
+    <script>
+        console.log('jQuery', $);
+        $('#simpleGrid_8').applyGrid({col: 4, gap: 16});
+
+        $('#simpleGrid_4').applyGrid({
+            col: 5, gap: 5,
+            width: 200,
+            border: { radius: 15 },
+            size: [[3, 2], [2, 3], [3, 3], [2, 2]],
+        });
+
+    </script>
+</body>
+</html>
