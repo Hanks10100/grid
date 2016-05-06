@@ -16,6 +16,23 @@ function xor(A, B) {
         .concat(B.filter(b => A.every(a => !isEqual(a, b))))
 }
 
+// 根据边界集合计算下一个起点的坐标
+function getOrigin(boundary) {
+    let minX = Number.MAX_VALUE;
+    let minY = Number.MAX_VALUE;
+
+    boundary.forEach(point => {
+        if (point.y < minY) {
+            minX = point.x;
+            minY = point.y;
+        } else if (point.y === minY) {
+            minX = (point.x < minX) ? point.x : minX;
+        }
+    });
+
+    return { x: minX, y: minY };
+}
+
 function computePosition(gridWidth, boxes) {
 }
 
