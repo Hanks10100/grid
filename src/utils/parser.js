@@ -1,4 +1,9 @@
 
+// 判断参数是否为数字
+function isNumber(n) {
+    return Object.prototype.toString.call(n) === '[object Number]';
+}
+
 // 根据属性值计算布局样式
 function getGridStyle(props, origins) {
     const { unit = 'px', column, width, layout, gap = 0, border } = props;
@@ -30,7 +35,7 @@ function getGridStyle(props, origins) {
         // 给网格添加边框
         if (border) {
             const { width, style = 'solid', color = '#000', radius } = border;
-            const borderStyle = `${width} ${style} ${color}`;
+            const borderStyle = `${width}${isNumber(width) ? unit : ''} ${style} ${color}`;
             if (width && coord.x > 0) boxStyle.borderLeft = borderStyle;
             if (width && coord.y > 0) boxStyle.borderTop  = borderStyle;
             if (radius) boxStyle.borderRadius = radius;

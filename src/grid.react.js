@@ -24,7 +24,7 @@ function GridLayout(props) {
     )
 }
 
-const { arrayOf, element, number, shape, string } = React.PropTypes;
+const { arrayOf, element, number, oneOfType, shape, string } = React.PropTypes;
 GridLayout.propTypes = {
     width: number.isRequired,
     unit: string,
@@ -32,7 +32,7 @@ GridLayout.propTypes = {
     layout: arrayOf(arrayOf(number)).isRequired,
     gap: number,
     border: shape({
-        width: string,
+        width: oneOfType[string, number],
         style: string,
         color: string,
         radius: string,
