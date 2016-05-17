@@ -1,6 +1,7 @@
 # 二维网格布局
 
 ![grid-layout](grid-layout.jpg)
+![grid-layout](grid-layout.gif)
 
 支持复杂情况下的二维布局。
 
