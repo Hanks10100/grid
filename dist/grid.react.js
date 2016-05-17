@@ -135,6 +135,11 @@
 
 	'use strict';
 	
+	// 判断参数是否为数字
+	function isNumber(n) {
+	    return Object.prototype.toString.call(n) === '[object Number]';
+	}
+	
 	// 根据属性值计算布局样式
 	function getGridStyle(props, origins) {
 	    var _props$unit = props.unit;
@@ -180,7 +185,7 @@
 	            var color = _border$color === undefined ? '#000' : _border$color;
 	            var radius = border.radius;
 	
-	            var borderStyle = _width + ' ' + style + ' ' + color;
+	            var borderStyle = '' + _width + (isNumber(_width) ? unit : '') + ' ' + style + ' ' + color;
 	            if (_width && coord.x > 0) boxStyle.borderLeft = borderStyle;
 	            if (_width && coord.y > 0) boxStyle.borderTop = borderStyle;
 	            if (radius) boxStyle.borderRadius = radius;
@@ -238,6 +243,7 @@
 	var arrayOf = _React$PropTypes.arrayOf;
 	var element = _React$PropTypes.element;
 	var number = _React$PropTypes.number;
+	var oneOfType = _React$PropTypes.oneOfType;
 	var shape = _React$PropTypes.shape;
 	var string = _React$PropTypes.string;
 	
@@ -248,7 +254,7 @@
 	    layout: arrayOf(arrayOf(number)).isRequired,
 	    gap: number,
 	    border: shape({
-	        width: string,
+	        width: oneOfType[(string, number)],
 	        style: string,
 	        color: string,
 	        radius: string
